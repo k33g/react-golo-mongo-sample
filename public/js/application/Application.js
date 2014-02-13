@@ -31,6 +31,7 @@ define([
         document.querySelector('big-title')
       );
 
+
       React.renderComponent(
         <PostitForm/>,
         document.querySelector('.postit-form')
@@ -40,6 +41,7 @@ define([
         <PostitsList pollInterval={500}/>,
         document.querySelector('.postits-list')
       );
+
 
     },
     // when routes

@@ -4,14 +4,15 @@ import m33ki.spark
 import m33ki.jackson
 import models.postit
 
-function PostItsController = |postits| {
+
+function PostItsController = |postits| { #arg is a collection
 
   return DynamicObject()
     : define("getAll", |this, request, response| {
       # GET request : get all models
         response: type("application/json")
         response: status(200)
-        return postits: fetch(): toJsonString()
+        return Json(): toJsonString(postits: fetchAllReadable())
     })
     : define("getOne", |this, request, response| {
       # GET request : get one model by id
@@ -31,7 +32,7 @@ function PostItsController = |postits| {
       # POST request : create a model
         response: type("application/json")
         let postit = postits: model(): fromJsonString(request: body())
-        postit: create() # insert in collection
+        postit: insert() # insert in collection
         response: status(201) # 201: created
         return postit: toJsonString()
     })
@@ -47,21 +48,9 @@ function PostItsController = |postits| {
       # DELETE request : delete a model
         response: type("application/json")
         let id = request: params(":id")
-        let postit = postits: model(): delete(id)
+        let postit = postits: model(): remove(id)
         response: status(200) # 200: Ok + return data
         return postit: toJsonString()
-    })
-    : define("getLast", |this| {
-        return postits: lastN(1, -1)
-    })
-    : define("getLastN", |this, N| {
-        return postits: lastN(N, -1)
-    })
-    : define("find", |this, fieldName, equalsValue| {
-        return postits: find(fieldName, equalsValue)
-    })
-    : define("like", |this, fieldName, likesValue| {
-        return postits: like(fieldName, likesValue)
     })
 
     #W.I.P.

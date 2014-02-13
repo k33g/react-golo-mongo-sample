@@ -40,7 +40,7 @@ define([
         },
         deletePostit : function(id){
           console.log("=== delete Postit ===", id);
-          var tmpPostit = new Postit({id:id}).destroy();
+          var tmpPostit = new Postit({_id:id}).destroy();
           this.navigate('/');
         }
       });
@@ -55,7 +55,7 @@ define([
     render: function() {
 
       var postitsNodes = this.state.data.map(function(postit){
-        var deleteLink = "#delete_postit/" + postit.id;
+        var deleteLink = "#delete_postit/" + postit._id;
         return (<li>
            {postit.text} {" "} {postit.star} {" "}<a href={deleteLink}>delete</a>
         </li>);

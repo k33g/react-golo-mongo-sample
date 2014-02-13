@@ -10,6 +10,7 @@ function definePostItsRoutes = {
   # Collection Helper
   let postits = PostIts()
 
+
   GET("/coucou", |request, response| -> Json(): message("coucou"))
 
   # Create PostIt
@@ -24,6 +25,7 @@ function definePostItsRoutes = {
 
   # Retrieve PostIt by id
   GET("/postits/:id", |request, response| {
+    #return PostItsController(postits): getOne(request, response)
     return PostItsController(postits): getOne(request, response)
   })
 

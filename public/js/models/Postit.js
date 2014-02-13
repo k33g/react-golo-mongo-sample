@@ -9,6 +9,7 @@ define([
             text:"???", star:false
           }
         },
+        idAttribute: "_id",
         urlRoot : "postits"
     });
 
